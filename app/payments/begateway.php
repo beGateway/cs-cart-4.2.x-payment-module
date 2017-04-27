@@ -1,6 +1,6 @@
 <?php
 use Tygh\Registry;
-require __DIR__ . '/lib/lib/beGateway.php';
+require Registry::get('config.dir.addons') . 'begateway/payments/lib/lib/beGateway.php';
 
 if ( !defined('AREA') ) { die('Access denied'); }
 

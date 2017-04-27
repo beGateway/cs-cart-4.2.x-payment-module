@@ -4,12 +4,12 @@ This is a Payment Module for CS-Cart, that gives you the ability to process paym
 
 ## Requirements
 
-  * CS-Cart 4.5.x version
+  * CS-Cart 4.2.x version
 
 ## Installation
 
 1. Download [the payment module
-   add-on](https://github.com/beGateway/cs-cart-4.5.x-payment-module/raw/master/cs-cart-4.5.x-payment-module.zip)
+   add-on](https://github.com/beGateway/cs-cart-4.2.x-payment-module/raw/master/cs-cart-4.2.x-payment-module.zip)
 2. In the CS-Cart administration panel, go to _Add-Ons_
    and install the payment module add-on
 3. In the administration panel, go to Administration > Payment methods.
