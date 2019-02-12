@@ -113,17 +113,17 @@ if (defined('PAYMENT_NOTIFICATION')) {
   $transaction->setAddressHidden();
   $transaction->setEmailReadonly();
 
-  if ($processor_data['processor_params']['begateway_bankcard'] == 'Y') {
+  if (isset($processor_data['processor_params']['begateway_bankcard']) && $processor_data['processor_params']['begateway_bankcard'] == 'Y') {
     $cc = new \beGateway\PaymentMethod\CreditCard;
     $transaction->addPaymentMethod($cc);
   }
 
-  if ($processor_data['processor_params']['begateway_bankcard_halva'] == 'Y') {
+  if (isset($processor_data['processor_params']['begateway_bankcard_halva']) && $processor_data['processor_params']['begateway_bankcard_halva'] == 'Y') {
     $halva = new \beGateway\PaymentMethod\CreditCardHalva;
     $transaction->addPaymentMethod($halva);
   }
 
-  if ($processor_data['processor_params']['begateway_erip'] == 'Y') {
+  if (isset($processor_data['processor_params']['begateway_erip']) && $processor_data['processor_params']['begateway_erip'] == 'Y') {
     $erip = new \beGateway\PaymentMethod\Erip(array(
       'order_id' => $order_id,
       'account_number' => $order_id,
@@ -134,16 +134,21 @@ if (defined('PAYMENT_NOTIFICATION')) {
 
   try {
     $response = $transaction->submit();
-  } catch (Exception $e) { }
+  } catch (Exception $e) {
+    $result = '<strong>'. __('payments.begateway.token_error') . '</strong><br>';
+    $result.= __('payments.begateway.return_checkout', ['[return_url]' => $cancel_url]);
+    $result.='<br><br><pre>' . $e->getMessage() . '</pre>';
+    fn_echo($result);
+    exit;
+  }
 
   if ($response->isSuccess()) {
     fn_echo('<meta http-equiv="Refresh" content="0;URL=' . $response->getRedirectUrl() . '" />');
   } else {
     $result = '<strong>'. __('payments.begateway.token_error') . '</strong><br>';
     $result.= __('payments.begateway.return_checkout', ['[return_url]' => $cancel_url]);
-    $result.='<br><br><pre>' . $result->getMessage() . '</pre>';
+    $result.='<br><br><pre>' . $response->getMessage() . '</pre>';
     fn_echo($result);
   }
   exit;
 }
-?>

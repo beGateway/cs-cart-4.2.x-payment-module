@@ -4,7 +4,7 @@
   <name>beGateway</name>
   <copyright>eComCharge Ltd SIA</copyright>
   <authorEmail>techsupport@begateway.com</authorEmail>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <default_language>en</default_language>
   <priority>100</priority>
   <status>active</status>
